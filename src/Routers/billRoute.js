@@ -1,32 +1,32 @@
 const express = require("express")
-const user = require("../models/user")
+const bill = require("../models/bill")
 const router = express.Router();
 
 // here we create our Route
-router.post("/user", async (req, res) => {
+router.post("/add-billing", async (req, res) => {
     console.log(req.body)
-    const data = new user(req.body)
+    const data = new bill(req.body)
     const result = await data.save()
 
     if (!result) {
         res.json({
             status: "FAILED",
-            message: "user not register successfully...."
+            message: "bill not register successfully...."
         })
     }
     else {
         res.json({
             status: "SUCCESS",
-            message: "user register successfully....",
+            message: "bill register successfully....",
             data: result
         })
     }
 })
 
 //get records 
-router.get("/user", async (req, res) => {
+router.get("/billing-list", async (req, res) => {
     try {
-        const result = await user.find()
+        const result = await bill.find()
         if (!result) {
             res.json({
                 status: "FAILED",
@@ -47,10 +47,10 @@ router.get("/user", async (req, res) => {
 })
 
 //get single record
-router.get("/user/:id", async (req, res) => {
+router.get("/bill/:id", async (req, res) => {
     try {
         const _id = req.params.id;
-        const result = await user.findById(_id);
+        const result = await bill.findById(_id);
         if (!result) {
             res.json({
                 status: "FAILED",
@@ -70,10 +70,10 @@ router.get("/user/:id", async (req, res) => {
     }
 })
 // update records 
-router.put("/user/:id", async (req, res) => {
+router.put("/update-billing/:id", async (req, res) => {
     try {
         const _id = req.params.id;
-        const result = await user.findByIdAndUpdate(_id,req.body,{new: true});
+        const result = await bill.findByIdAndUpdate(_id,req.body,{new: true});
         console.log(result)
         if (!result) {
             res.json({
@@ -95,10 +95,10 @@ router.put("/user/:id", async (req, res) => {
     }
 })
 // Delete Records 
-router.delete("/user/:id", async (req, res) => {
+router.delete("/delete-billing/:id", async (req, res) => {
     try {
         const _id = req.params.id;
-        const result = await user.findByIdAndDelete(_id);
+        const result = await bill.findByIdAndDelete(_id);
         if (!result) {
             res.json({
                 status: "FAILED",

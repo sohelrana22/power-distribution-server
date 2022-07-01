@@ -1,6 +1,5 @@
-
 const mongoose = require("mongoose")
-const DB = "mongodb://localhost:27017/user"
+const DB = `mongodb+srv://sohel:H9L5sPH0HjjrDE3y@cluster0.c9elrnk.mongodb.net/power?retryWrites=true&w=majority`
 mongoose.connect(DB).then(() => {
     console.log("connection is successfully setup..")
 }).catch((e)=>{

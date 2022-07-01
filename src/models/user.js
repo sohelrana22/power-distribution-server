@@ -1,32 +1,9 @@
-const mongoose = require('mongoose')
-const validator = require('validator')
+const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: [true, "this email is already exist"],
-        validate(value) {
-            if (!validator.isEmail(value)) {
-                throw new Error("this email is not valid")
-            }
-        }
-    },
-    number: {
-        type: String,
-        required: true,
-        min: 11,
-    },
-    amount: {
-        type: Number,
-        required: true
-    }
-})
+  name: String,
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true }
+});
 
-const user =  new mongoose.model('user',userSchema);
-
-module.exports = user;
+module.exports = mongoose.model('User', userSchema);
